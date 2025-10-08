@@ -3,7 +3,7 @@ name: MLOps CI/CD Pipeline
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch:  # allows manual trigger
 
 jobs:
   mlops_pipeline:
@@ -20,14 +20,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Run MLOps pipeline
       run: python main.py
 
     - name: Save retrained model
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4   # Updated to v4
       with:
         name: rf_model
         path: models/rf_model.pkl
